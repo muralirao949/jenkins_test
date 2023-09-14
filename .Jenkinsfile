@@ -13,7 +13,7 @@ pipeline {
                 echo "printing 1"
             }
         }
-        stage("print1") {
+        stage("print2") {
             steps {
                 echo "printing 1"
             }
