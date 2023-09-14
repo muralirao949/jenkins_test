@@ -39,8 +39,7 @@ pipeline {
                 success {
                     junit 'api-gateway/target/surefire-reports/*.xml'
                     archiveArtifacts 'api-gateway/target/*.jar'
-                    emailext body: "Please check the console output at $BUILD_URL for more information", to: "muralirao949@gmail.com", subject: '$PROJECT_NAME is completed - Build number is $BUILD_NUMBER - Build status is $BUILD_STATUS'
-                }
+                    }
             }
         }
 stage('Approval') {
@@ -48,7 +47,9 @@ stage('Approval') {
         timeout(time:1, unit: 'MINUTES')
     }
   steps {
-    input "Please approve to proceed with deployment"
+emailext body: "Please click at $BUILD_URL/input to approve the deployment /n This link is valid for 1 minute", to: "muralirao949@gmail.com", subject: '$PROJECT_NAME is ready for deployment - Build number is $BUILD_NUMBER - Please approve to proceed with Deployment'
+                    
+input "Please approve to proceed with deployment"
   }
 }
 stage('Deployment'){
